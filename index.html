@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurante XYZ | Menú digital</title>
+<style>
+:root{--brand:#674832;--brand2:#8b684e;--bg:#f7f5f1;--paper:#fff;--ink:#263238;--muted:#718096;--line:#e7e2dc;--soft:#f1e9e2;--good:#39745b;--danger:#a7473f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top{max-width:1120px;margin:auto;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px}.logo{background:var(--brand);color:#fff;font-weight:bold;padding:12px;border-radius:10px}.brand h1{font-size:16px;margin:0}.brand small{color:var(--muted);font-size:11px}
+nav{display:flex;gap:8px;flex-wrap:wrap}button,.btn{border:0;border-radius:8px;padding:10px 14px;font-weight:700;font-size:12px;cursor:pointer;text-decoration:none;display:inline-block}
+.primary{background:var(--brand);color:#fff}.light{background:#fff;border:1px solid var(--line);color:var(--ink)}.danger{background:#faecea;color:var(--danger)}button:disabled{opacity:.5;cursor:not-allowed}
+main{max-width:1120px;margin:25px auto;padding:0 16px}.hero{text-align:center;padding:24px 10px 16px}.hero small{letter-spacing:1.4px;color:var(--brand);font-weight:bold}.hero h2{font-size:28px;margin:9px 0}.hero p{font-size:13px;color:var(--muted);line-height:1.6;max-width:680px;margin:auto}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;margin:14px 0;box-shadow:0 5px 20px #34200b08}.panel h3{font-size:16px;margin:0 0 6px}.muted{font-size:12px;color:var(--muted);line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.dish{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.dish img{width:100%;height:150px;object-fit:cover;background:var(--soft)}.dishbody{padding:13px}.dish h4{margin:0 0 6px;font-size:14px}.dish p{font-size:11px;line-height:1.5;color:var(--muted);min-height:32px}.pill{display:inline-block;border-radius:20px;background:#f2efeb;padding:5px 8px;font-size:10px;margin:2px}.price{font-weight:bold;color:var(--brand);font-size:12px;margin-top:8px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field label{display:block;font-size:12px;font-weight:bold;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;font:12px Arial;background:#fff}.field textarea{min-height:70px;resize:vertical}.field{margin-bottom:12px}.field.full{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.choicegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choicegroup{margin:16px 0}.choicegroup strong{display:block;font-size:12px;margin-bottom:8px}.choice{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin:3px;font-size:11px;cursor:pointer}.choice:has(input:checked){background:var(--soft);border-color:var(--brand);color:var(--brand)}
+.hidden{display:none!important}.notice{background:#f8f2e8;border-radius:8px;padding:11px;font-size:11px;color:#705b43;line-height:1.5;margin-top:12px}.success{color:var(--good);font-size:12px;margin-top:10px}.error{color:var(--danger);font-size:12px;margin-top:10px}
+.preview{display:flex;align-items:center;gap:15px;flex-wrap:wrap}.preview img{width:130px;height:130px;object-fit:contain;border:1px solid var(--line);padding:5px;border-radius:10px}
+footer{text-align:center;color:#9aa0a6;font-size:10px;padding:25px}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:1fr}.hero h2{font-size:23px}.top{align-items:flex-start;flex-direction:column}}
+@media(max-width:460px){.grid{grid-template-columns:1fr}.panel{padding:15px}}
+</style>
+</head>
+<body>
+<header><div class="top">
+ <div class="brand"><div class="logo" id="logoText">XYZ</div><div><h1 id="headerName">Restaurante XYZ</h1><small>Menú digital y sugerencias personalizadas</small></div></div>
+ <nav>
+  <button class="light hidden" id="clientTab">Vista del cliente</button>
+  <button class="primary hidden" id="adminTab">Administrar menú</button>
+  <button class="light hidden" id="roleBack">Cambiar acceso</button>
+</nav>
+</div></header>
+<main>
+<section id="roleView">
+  <div class="hero">
+    <small>RESTAURANTE XYZ</small>
+    <h2>Bienvenido al menú digital</h2>
+    <p>Seleccione el tipo de acceso para continuar.</p>
+  </div>
+  <div class="panel" style="max-width:720px;margin:20px auto">
+    <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      <article class="dish" style="padding:22px;text-align:center">
+        <div style="font-size:38px">🍽️</div>
+        <h3>Acceso de clientes</h3>
+        <p class="muted">Consultar el menú y recibir sugerencias de platos según sus preferencias.</p>
+        <button class="primary" type="button" onclick="enterRole('client')">Ingresar como cliente</button>
+      </article>
+      <article class="dish" style="padding:22px;text-align:center">
+        <div style="font-size:38px">⚙️</div>
+        <h3>Acceso del administrador</h3>
+        <p class="muted">Gestionar la información del restaurante, los platos, las fotografías y los precios.</p>
+        <button class="primary" type="button" onclick="enterRole('admin')">Ingresar como administrador</button>
+      </article>
+    </div>
+    <div class="notice">Prototipo demostrativo: el acceso de administrador de esta versión no tiene autenticación segura. No publique información confidencial ni utilice datos reales sensibles.</div>
+  </div>
+</section>
+
+<section id="clientView" class="hidden">
+ <div class="hero"><small id="eyebrow">MENÚ INTERACTIVO</small><h2 id="welcome">Encuentre un plato a su gusto</h2><p id="intro">Indique sus preferencias y conozca opciones del menú que podrían ajustarse a sus elecciones.</p></div>
+ <div class="panel">
+  <h3>Seleccione sus preferencias</h3><p class="muted">Elija una alternativa en cada apartado para recibir sugerencias del menú.</p>
+  <form id="prefForm">
+   <div class="choicegroup"><strong>1. ¿Qué tipo de plato prefiere?</strong><div id="proteinChoices">
+    <label class="choice"><input type="radio" name="protein" value="res" required> Res</label><label class="choice"><input type="radio" name="protein" value="cerdo"> Cerdo</label><label class="choice"><input type="radio" name="protein" value="pollo"> Pollo</label><label class="choice"><input type="radio" name="protein" value="pescado"> Pescado</label><label class="choice"><input type="radio" name="protein" value="mariscos"> Mariscos</label><label class="choice"><input type="radio" name="protein" value="vegetariano"> Vegetariano</label><label class="choice"><input type="radio" name="protein" value="mixto"> Mixto</label><label class="choice"><input type="radio" name="protein" value="cualquiera"> Sin preferencia</label>
+   </div></div>
+   <div class="choicegroup"><strong>2. ¿Qué preparación prefiere?</strong><div>
+    <label class="choice"><input type="radio" name="prep" value="parrilla" required> A la parrilla</label><label class="choice"><input type="radio" name="prep" value="frito"> Frito o apanado</label><label class="choice"><input type="radio" name="prep" value="salsa"> Con salsa</label><label class="choice"><input type="radio" name="prep" value="horno"> Al horno</label><label class="choice"><input type="radio" name="prep" value="cualquiera"> Sin preferencia</label>
+   </div></div>
+   <div class="choicegroup"><strong>3. ¿Para cuántas personas busca el plato?</strong><div>
+    <label class="choice"><input type="radio" name="people" value="uno" required> Una persona</label><label class="choice"><input type="radio" name="people" value="dos"> Dos personas</label><label class="choice"><input type="radio" name="people" value="grupo"> Tres o más</label><label class="choice"><input type="radio" name="people" value="cualquiera"> Sin preferencia</label>
+   </div></div>
+   <div class="actions"><button class="primary" type="submit">Mostrar sugerencias</button><button class="light" type="reset">Limpiar</button></div>
+  </form>
+ </div>
+ <div class="panel hidden" id="suggestionPanel"><h3>Platos que podrían ajustarse a sus preferencias</h3><p class="muted">Las sugerencias se ordenan según las características seleccionadas.</p><div class="grid" id="suggestions"></div><div class="notice">Consulte al personal sobre disponibilidad, ingredientes, posibles alérgenos y modificaciones antes de realizar su pedido.</div></div>
+ <div class="panel"><h3>Menú del establecimiento</h3><p class="muted">Consulte las preparaciones disponibles.</p><div class="grid" id="publicMenu"></div></div>
+</section>
+
+<section id="adminView" class="hidden">
+ <div class="hero"><small>ESPACIO DE GESTIÓN</small><h2>Administración del menú</h2><p>Edite la información del restaurante y gestione sus platos sin modificar líneas de programación.</p></div>
+ <div class="panel">
+  <h3>Información del restaurante</h3><div class="formgrid">
+   <div class="field"><label for="restaurantName">Nombre del establecimiento</label><input id="restaurantName" value="Restaurante XYZ"></div>
+   <div class="field"><label for="restaurantShort">Nombre corto o iniciales</label><input id="restaurantShort" value="XYZ" maxlength="5"></div>
+   <div class="field full"><label for="welcomeText">Mensaje de bienvenida</label><input id="welcomeText" value="Encuentre un plato a su gusto"></div>
+   <div class="field full"><label for="introText">Descripción breve</label><textarea id="introText">Indique sus preferencias y conozca opciones del menú que podrían ajustarse a sus elecciones.</textarea></div>
+  </div><button class="primary" id="saveRestaurant">Guardar información</button><span id="restaurantMsg" class="success"></span>
+ </div>
+ <div class="panel">
+  <h3 id="dishFormTitle">Agregar un plato al menú</h3><p class="muted">Complete los campos y cargue una fotografía desde su dispositivo.</p>
+  <form id="dishForm"><input type="hidden" id="dishId">
+   <div class="formgrid">
+    <div class="field"><label for="dishName">Nombre del plato</label><input id="dishName" required placeholder="Ej. Parrillada de la casa"></div>
+    <div class="field"><label for="dishPrice">Precio (USD)</label><input id="dishPrice" type="number" min="0" step="0.01" placeholder="Ej. 12.50"></div>
+    <div class="field"><label for="dishProtein">Tipo de proteína</label><select id="dishProtein" required><option value="">Seleccione</option><option value="res">Res</option><option value="cerdo">Cerdo</option><option value="pollo">Pollo</option><option value="pescado">Pescado</option><option value="mariscos">Mariscos</option><option value="vegetariano">Vegetariano</option><option value="mixto">Mixto</option></select></div>
+    <div class="field"><label for="dishPrep">Forma de preparación</label><select id="dishPrep" required><option value="">Seleccione</option><option value="parrilla">A la parrilla</option><option value="frito">Frito o apanado</option><option value="salsa">Con salsa</option><option value="horno">Al horno</option></select></div>
+    <div class="field"><label for="dishPeople">Tipo de porción</label><select id="dishPeople"><option value="uno">Individual</option><option value="dos">Para dos</option><option value="grupo">Para compartir</option></select></div>
+    <div class="field"><label for="dishImage">Fotografía del plato</label><input id="dishImage" type="file" accept="image/*"></div>
+    <div class="field full"><label for="dishDescription">Descripción e ingredientes principales</label><textarea id="dishDescription" placeholder="Describa brevemente el plato"></textarea></div>
+    <div class="field"><label><input id="dishAvailable" type="checkbox" checked style="width:auto"> Plato disponible</label></div>
+   </div>
+   <div class="actions"><button class="primary" type="submit">Guardar plato</button><button class="light" type="button" id="cancelEdit">Cancelar edición</button></div><div id="dishMsg" class="success"></div>
+  </form>
+ </div>
+ <div class="panel"><h3>Platos registrados</h3><p class="muted">Desde esta sección puede editar, activar, desactivar o eliminar preparaciones.</p><div class="grid" id="adminMenu"></div></div>
+ <div class="panel"><h3>Respaldo del menú</h3><p class="muted">Descargue una copia de los datos del menú o importe un respaldo anterior.</p><div class="actions"><button class="light" id="exportData">Descargar respaldo JSON</button><label class="btn light" for="importData">Importar respaldo JSON</label><input class="hidden" id="importData" type="file" accept=".json,application/json"></div><div class="notice">Este prototipo guarda los cambios en el almacenamiento local del navegador y dispositivo. Para que varios teléfonos vean los cambios de forma compartida, se necesita conectar la aplicación a una base de datos en línea y configurar acceso administrativo.</div></div>
+</section>
+</main>
+<footer>Prototipo académico · Restaurante XYZ · Personalice el catálogo antes de utilizarlo.</footer>
+<script>
+const KEY="xyz_menu_demo_v1", SETTINGS="xyz_settings_demo_v1";
+const sample=[
+{id:"1",name:"T-Bone",price:"Consultar",protein:"res",prep:"parrilla",people:"uno",description:"Corte de res acompañado de guarniciones.",image:"",available:true},
+{id:"2",name:"Parrillada mixta",price:"Consultar",protein:"mixto",prep:"parrilla",people:"grupo",description:"Combinación de carnes y acompañamientos para compartir.",image:"",available:true},
+{id:"3",name:"Chuleta de cerdo",price:"Consultar",protein:"cerdo",prep:"parrilla",people:"uno",description:"Chuleta de cerdo con guarniciones.",image:"",available:true},
+{id:"4",name:"Trucha frita",price:"Consultar",protein:"pescado",prep:"frito",people:"uno",description:"Trucha acompañada de guarniciones.",image:"",available:true},
+{id:"5",name:"Camarones al ajillo",price:"Consultar",protein:"mariscos",prep:"salsa",people:"uno",description:"Camarones preparados al ajillo.",image:"",available:true},
+{id:"6",name:"Ensalada vegetariana",price:"Consultar",protein:"vegetariano",prep:"horno",people:"uno",description:"Preparación vegetariana con vegetales frescos.",image:"",available:true}
+];
+const labels={res:"Res",cerdo:"Cerdo",pollo:"Pollo",pescado:"Pescado",mariscos:"Mariscos",vegetariano:"Vegetariano",mixto:"Mixto",parrilla:"A la parrilla",frito:"Frito o apanado",salsa:"Con salsa",horno:"Al horno",uno:"Individual",dos:"Para dos",grupo:"Para compartir",cualquiera:"Sin preferencia"};
+let dishes=load(KEY,sample), settings=load(SETTINGS,{name:"Restaurante XYZ",short:"XYZ",welcome:"Encuentre un plato a su gusto",intro:"Indique sus preferencias y conozca opciones del menú que podrían ajustarse a sus elecciones."});
+function load(k,def){try{let v=localStorage.getItem(k);return v?JSON.parse(v):structuredClone(def)}catch(e){return def}}
+function save(){localStorage.setItem(KEY,JSON.stringify(dishes))}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function imageHTML(d){return d.image?`<img src="${d.image}" alt="${esc(d.name)}">`:`<div style="height:150px;background:#f1e9e2;display:grid;place-items:center;color:#8b684e;font-size:34px">🍽️</div>`}
+function card(d,admin=false){return `<article class="dish">${imageHTML(d)}<div class="dishbody"><h4>${esc(d.name)}</h4><p>${esc(d.description||"Sin descripción")}</p><span class="pill">${labels[d.protein]||d.protein}</span><span class="pill">${labels[d.prep]||d.prep}</span><div class="price">${d.price&&d.price!=="Consultar"?"$"+esc(d.price):"Consultar precio"}</div>${admin?`<div class="actions"><button class="light" onclick="editDish('${d.id}')">Editar</button><button class="light" onclick="toggleDish('${d.id}')">${d.available?"Desactivar":"Activar"}</button><button class="danger" onclick="deleteDish('${d.id}')">Eliminar</button></div><small class="muted">${d.available?"Disponible":"No disponible"}</small>`:""}</div></article>`}
+function render(){document.getElementById("headerName").textContent=settings.name;document.getElementById("logoText").textContent=settings.short||"XYZ";document.getElementById("welcome").textContent=settings.welcome;document.getElementById("intro").textContent=settings.intro;document.getElementById("restaurantName").value=settings.name;document.getElementById("restaurantShort").value=settings.short;document.getElementById("welcomeText").value=settings.welcome;document.getElementById("introText").value=settings.intro;document.getElementById("publicMenu").innerHTML=dishes.filter(d=>d.available).map(d=>card(d)).join("")||"<p class='muted'>El restaurante aún no ha publicado platos.</p>";document.getElementById("adminMenu").innerHTML=dishes.map(d=>card(d,true)).join("")||"<p class='muted'>Todavía no hay platos registrados.</p>"}
+document.getElementById("clientTab").onclick=()=>show("client");document.getElementById("adminTab").onclick=()=>show("admin");
+document.getElementById("roleBack").onclick=()=>show("role");
+function enterRole(v){show(v)}
+function show(v){
+  document.getElementById("roleView").classList.toggle("hidden",v!=="role");
+  document.getElementById("clientView").classList.toggle("hidden",v!=="client");
+  document.getElementById("adminView").classList.toggle("hidden",v!=="admin");
+  document.getElementById("clientTab").classList.toggle("hidden",v==="role");
+  document.getElementById("adminTab").classList.toggle("hidden",v==="role");
+  document.getElementById("roleBack").classList.toggle("hidden",v==="role");
+  document.getElementById("clientTab").className=v==="client"?"primary":"light";
+  document.getElementById("adminTab").className=v==="admin"?"primary":"light";
+}
+document.getElementById("saveRestaurant").onclick=()=>{settings={name:document.getElementById("restaurantName").value.trim()||"Restaurante XYZ",short:document.getElementById("restaurantShort").value.trim()||"XYZ",welcome:document.getElementById("welcomeText").value.trim(),intro:document.getElementById("introText").value.trim()};localStorage.setItem(SETTINGS,JSON.stringify(settings));render();document.getElementById("restaurantMsg").textContent="Información guardada en este navegador."}
+document.getElementById("dishForm").onsubmit=async e=>{e.preventDefault();let id=document.getElementById("dishId").value||String(Date.now()),old=dishes.find(d=>d.id===id),file=document.getElementById("dishImage").files[0],image=old?.image||"";if(file){if(file.size>1500000){alert("La imagen debe pesar menos de 1,5 MB. Redúzcala e intente nuevamente.");return}image=await toData(file)}let d={id,name:document.getElementById("dishName").value.trim(),price:document.getElementById("dishPrice").value||"Consultar",protein:document.getElementById("dishProtein").value,prep:document.getElementById("dishPrep").value,people:document.getElementById("dishPeople").value,description:document.getElementById("dishDescription").value.trim(),image,available:document.getElementById("dishAvailable").checked};let i=dishes.findIndex(x=>x.id===id);if(i>=0)dishes[i]=d;else dishes.push(d);save();render();e.target.reset();document.getElementById("dishId").value="";document.getElementById("dishFormTitle").textContent="Agregar un plato al menú";document.getElementById("dishMsg").textContent="Plato guardado correctamente.";};
+function toData(file){return new Promise((resolve,reject)=>{let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+window.editDish=id=>{let d=dishes.find(x=>x.id===id);if(!d)return;document.getElementById("dishId").value=d.id;document.getElementById("dishName").value=d.name;document.getElementById("dishPrice").value=d.price==="Consultar"?"":d.price;document.getElementById("dishProtein").value=d.protein;document.getElementById("dishPrep").value=d.prep;document.getElementById("dishPeople").value=d.people;document.getElementById("dishDescription").value=d.description;document.getElementById("dishAvailable").checked=d.available;document.getElementById("dishFormTitle").textContent="Editar plato";document.getElementById("dishForm").scrollIntoView({behavior:"smooth"})};
+window.toggleDish=id=>{let d=dishes.find(x=>x.id===id);if(d){d.available=!d.available;save();render()}};
+window.deleteDish=id=>{if(confirm("¿Desea eliminar este plato del menú?")){dishes=dishes.filter(x=>x.id!==id);save();render()}};
+document.getElementById("cancelEdit").onclick=()=>{document.getElementById("dishForm").reset();document.getElementById("dishId").value="";document.getElementById("dishFormTitle").textContent="Agregar un plato al menú"};
+document.getElementById("prefForm").onsubmit=e=>{e.preventDefault();let f=new FormData(e.target),a={protein:f.get("protein"),prep:f.get("prep"),people:f.get("people")};let list=dishes.filter(d=>d.available).map(d=>({...d,score:(a.protein==="cualquiera"||d.protein===a.protein||d.protein==="mixto"?4:0)+(a.prep==="cualquiera"||d.prep===a.prep?3:0)+(a.people==="cualquiera"||d.people===a.people?2:0)})).sort((x,y)=>y.score-x.score).slice(0,3);document.getElementById("suggestions").innerHTML=list.map(d=>card(d)).join("")||"<p class='muted'>No hay platos disponibles que mostrar. Consulte al personal del restaurante.</p>";document.getElementById("suggestionPanel").classList.remove("hidden");document.getElementById("suggestionPanel").scrollIntoView({behavior:"smooth"})};
+document.getElementById("prefForm").onreset=()=>document.getElementById("suggestionPanel").classList.add("hidden");
+document.getElementById("exportData").onclick=()=>{let blob=new Blob([JSON.stringify({settings,dishes},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="respaldo_menu_restaurante.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("importData").onchange=async e=>{let file=e.target.files[0];if(!file)return;try{let obj=JSON.parse(await file.text());if(!Array.isArray(obj.dishes))throw Error();dishes=obj.dishes;settings=obj.settings||settings;save();localStorage.setItem(SETTINGS,JSON.stringify(settings));render();alert("Respaldo importado correctamente.")}catch(err){alert("El archivo no tiene un formato de respaldo válido.")}e.target.value=""};
+render();
+</script>
+</body>
+</html>
